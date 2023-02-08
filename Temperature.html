@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Unit Converter</title>
+    <style>
+      #container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      #input-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 50px;
+      }
+      #output {
+        margin-top: 50px;
+        background-color: rgba(169, 190, 119, 0.8);
+      }
+      body{
+        background-image: url('Jabackground.png');
+        background-size: cover;
+        
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Unit Converter</h1>
+      <button id="Backer">HOME</button><br>
+      <a id="realback" href="index.html"></a>
+      <div id="input-form">
+        <input type="text" id="input-value" placeholder="Enter value in Celsius">
+        <button id="convert-button">Convert</button>
+      </div>
+      <div id="output" >
+        <p id="kelvin-output">Kelvin:</p>
+        <p id="fahrenheit-output">Fahrenheit:</p>
+        <p id="romer-output">Romer:</p>
+      </div>
+    </div>
+
+    <script>
+      const realback = document.getElementById('realback');
+      const Backer = document.getElementById('Backer');
+      Backer.addEventListener("click", function(){
+        Backer.innerHTML = "fake button lol"
+        realback.innerHTML = "Here's the real one"
+      })
+      const convertButton = document.querySelector("#convert-button");
+      convertButton.addEventListener("click", function() {
+        const inputValue = document.querySelector("#input-value").value;
+        const kelvin = parseFloat(inputValue) + 273.15;
+        const fahrenheit = (parseFloat(inputValue) * 9) / 5 + 32;
+        const romer = (parseFloat(inputValue) * 21) / 40 + 7.5;
+        document.querySelector("#kelvin-output").innerHTML =
+          "Kelvin: " + kelvin;
+        document.querySelector("#fahrenheit-output").innerHTML =
+          "Fahrenheit: " + fahrenheit;
+        document.querySelector("#romer-output").innerHTML =
+          "Romer: " + romer;
+        
+      });
+    </script>
+  </body>
+</html>
+

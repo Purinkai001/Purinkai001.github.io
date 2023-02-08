@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Unit Converter</title>
+    <style>
+      #container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      #input-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 50px;
+      }
+      #output {
+        margin-top: 50px;
+      }
+      #Backer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 50px;
+      }
+      body{
+        background-image: url('background.png');
+        background-size: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Unit Converter</h1>
+      <button id="Backer">HOME</button><br>
+      <a id="realback" href="index.html"></a>
+      <div id="input-form">
+        <select id="selection">
+          <option value="Meter">Meter</option>
+          <option value="Decimeter">Decimeter</option>
+          <option value="Centimeter">Centimeter</option>
+          <option value="Millimeter">Millimeter</option>
+          <option value="Micrometer">Micrometer</option>
+        </select>
+        <input type="text" id="input-value" placeholder="Enter value in meters">
+        <button id="convert-button">Convert</button>
+      </div>
+      <div id="output" style="background-color: lightpink;">
+        <p id="decimeter-output">Decimeters:</p>
+        <p id="centimeter-output">Centimeters:</p>
+        <p id="millimeter-output">Millimeters:</p>
+        <p id="micrometer-output">Micrometers:</p>
+      </div>
+    </div>
+
+    <script>
+      const convertButton = document.querySelector("#convert-button");
+      const Backer = document.getElementById('Backer');
+      const realback = document.getElementById('realback');
+      const selection = document.getElementById('selection')
+      Backer.addEventListener("click", function(){
+        Backer.innerHTML = "fake button lol"
+        realback.innerHTML = "Here's the real one"
+      })
+
+      convertButton.addEventListener("click", function() {
+        const inputValue = document.querySelector("#input-value").value;
+
+        let converter;
+
+        if (selection.value==='Centimeter'){
+          converter = inputValue/100;
+        } else if (selection.value==='Meter'){
+          converter = inputValue/1;
+        } else if (selection.value==='Decimeter'){
+          converter = inputValue/10;
+        } else if (selection.value==='Micrometer'){
+          converter = inputValue/1000000;
+        } else if (selection.value==='Millimeter'){
+          converter = inputValue/1000;
+        }
+        const centimeters = converter * 100;
+        const millimeters = converter * 1000;
+        const decimeters = converter * 10;
+        const micrometers = converter * 1000000;
+        document.querySelector("#decimeter-output").innerHTML =
+          "Decimeters: " + decimeters;
+        document.querySelector("#micrometer-output").innerHTML =
+          "Micrometers: " + micrometers;
+        document.querySelector("#centimeter-output").innerHTML =
+          "Centimeters: " + centimeters;
+        document.querySelector("#millimeter-output").innerHTML =
+          "Millimeters: " + millimeters;
+      });
+    </script>
+  </body>
+</html>
