@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My Portfolio</title>
+    <!-- Link to the external CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="#intro">Home</a>
+            <a href="#skills">Skills</a>
+
+            <!-- Portfolio Dropdown Menu -->
+            <div class="dropdown">
+                <a href="#portfolio" class="dropbtn">Portfolio</a>
+                <ul class="dropdown-content">
+                    <li><a href="#project1">Project 1</a></li>
+                    <li><a href="#project2">Project 2</a></li>
+                    <li><a href="#project3">Project 3</a></li>
+                </ul>
+            </div>
+
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <button id="theme-toggle">Toggle Theme</button>
+    </header>
+
+    <main>
+        <section id="intro">
+            <h1>Welcome to My Portfolio</h1>
+            <p>Hello! I am a web developer skilled in creating responsive and engaging websites.</p>
+            <button class="neon-button">Download Resume</button>
+        </section>
+
+        <section id="skills">
+            <h2>Skills</h2>
+            <div class="skill">
+                <h3>HTML & CSS</h3>
+                <p>Experienced in creating responsive web designs.</p>
+            </div>
+            <div class="skill">
+                <h3>JavaScript</h3>
+                <p>Proficient in JavaScript and modern JS frameworks.</p>
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <h2>Portfolio</h2>
+            <div class="project" data-project="Project 1">
+                <h3>Project 1</h3>
+                <p>Click to learn more.</p>
+            </div>
+            <div class="project" data-project="Project 2">
+                <h3>Project 2</h3>
+                <p>Click to learn more.</p>
+            </div>
+        </section>
+
+        <!-- Modal for project details -->
+        <div id="project-modal" class="modal">
+            <div class="modal-content">
+                <h3 id="modal-title"></h3>
+                <p id="modal-description"></p>
+                <button class="modal-close">Close</button>
+            </div>
+        </div>
+
+        <section id="contact">
+            <h2>Contact Me</h2>
+            <form id="contact-form">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="neon-button">Send Message</button>
+            </form>
+        </section>
+        
+    </main>
+
+    <footer>
+        <p>&copy; 2024 My Portfolio. All rights reserved.</p>
+    </footer>
+
+    <!-- Link to the external JS -->
+    <script src="scripts.js"></script>
+</body>
+</html>
