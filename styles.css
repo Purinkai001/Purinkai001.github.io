@@ -1,355 +1,239 @@
-/* Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
-/* General Reset */
-* {
+/* Global font settings */
+body {
+  font-family: 'Roboto', sans-serif; /* Body text font */
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #000; /* Solid black background */
-  color: #fff;
-  line-height: 1.6;
+  background: linear-gradient(to bottom right, #f4f4f9, #eaeff2); /* Light gradient background */
+  color: #333;
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* Light Theme */
-body.light-theme {
-  background-color: #fff;
-  color: #000;
+/* For headings, using Poppins font */
+h1, h2, h3, h4 {
+  font-family: 'Poppins', sans-serif;
+  color: #2c3e50;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Add subtle shadow to headings */
 }
 
-body.light-theme .skill {
-  background-color: #f0f0f0;
-  color: #000;
-  box-shadow: 0 0 10px #9400D3;
-}
-
-/* Header Styling */
-header {
-  background-color: #111;
-  padding: 20px 0;
-  text-align: center;
-  position: fixed;
-  width: 100%;
+/* Navigation Styles */
+nav {
+  background-color: #ffffff;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-header nav a {
-  color: #9400D3;
-  margin: 0 15px;
-  text-decoration: none;
-  font-size: 18px;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-header nav a:hover {
-  color: #fff;
-  text-shadow: 0px 0px 10px #9400D3;
-}
-
-/* Theme Toggle Button */
-#theme-toggle {
-  background-color: #9400D3;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-#theme-toggle:hover {
-  background-color: #fff;
-  color: #9400D3;
-}
-
-/* Main Section */
-main {
-  padding: 20px;
-  margin-top: 80px;
-}
-
-section {
-  padding: 60px 20px;
-}
-
-#intro {
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
   text-align: center;
-  margin: 50px 0;
 }
 
-h1, h2 {
-  color: #9400D3;
-  text-shadow: 0px 0px 10px #9400D3;
+nav ul li {
+  display: inline;
+  margin: 0 20px;
+}
+
+nav ul li a {
+  font-family: 'Roboto', sans-serif;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s, transform 0.2s ease;
+}
+
+nav ul li a:hover {
+  color: #0056b3;
+  transform: scale(1.1); /* Slight hover scaling effect */
+}
+
+/* Portfolio Section */
+.portfolio-container {
+  text-align: center;
+  margin: 80px auto;
+  max-width: 1200px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  margin-bottom: 30px;
+  font-size: 36px;
   font-weight: 600;
+  color: #333;
 }
 
-h2 {
-  margin-bottom: 20px;
-}
-
-/* Skill Cards */
-#skills {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-}
-
-.skill {
-  background-color: #111;
-  padding: 20px;
-  border-radius: 15px;
-  width: 45%;
-  margin: 10px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.skill:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 30px rgba(148, 0, 211, 0.7);
-}
-
-/* Portfolio Cards */
-#portfolio .project {
-  margin: 20px 0;
-  border: 1px solid #9400D3;
-  padding: 20px;
-  border-radius: 15px;
+/* Project Button Styling */
+.project-btn {
+  font-family: 'Poppins', sans-serif;
+  padding: 15px 30px;
+  margin: 15px;
+  border: 2px solid #007bff;
+  background-color: #ffffff;
+  color: #007bff;
+  font-size: 18px;
+  font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for button */
 }
 
-#portfolio .project:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 30px rgba(148, 0, 211, 0.7);
+.project-btn:hover {
+  background-color: #007bff;
+  color: white;
+  box-shadow: 0 6px 12px rgba(0, 123, 255, 0.2);
+  transform: translateY(-4px); /* Slight lift effect on hover */
 }
 
-/* Modal for project details */
+/* Modal Styles */
 .modal {
   display: none;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #111;
-  padding: 30px;
-  box-shadow: 0 0 30px #9400D3;
-  z-index: 1001;
-  border-radius: 15px;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .modal.active {
-  display: block;
-  animation: fadeInModal 0.4s forwards;
+  display: flex;
+  opacity: 1;
 }
 
-@keyframes fadeInModal {
-  from { opacity: 0; transform: translate(-50%, -60%); }
-  to { opacity: 1; transform: translate(-50%, -50%); }
-}
-
-.modal.inactive {
-  animation: modalFadeOut 0.4s forwards;
-  pointer-events: none;
-}
-
-@keyframes modalFadeOut {
-  from { opacity: 1; transform: translate(-50%, -50%); }
-  to { opacity: 0; transform: translate(-50%, -60%); }
-}
-
+/* Make the modal content scrollable */
 .modal-content {
-  color: white;
+  background-color: #ffffff;
+  color: #333;
+  padding: 40px;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 600px;
+  max-height: 80vh; /* Modal content will take up to 80% of the viewport height */
+  overflow-y: auto; /* Enable vertical scrolling if content overflows */
+  text-align: left;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .modal-close {
-  background-color: #9400D3;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
   cursor: pointer;
+  color: #ff6666;
+  margin-top: -30px;
 }
 
-/* Footer Styling */
-footer {
-  background-color: #111;
-  padding: 20px;
-  text-align: center;
-  color: #9400D3;
-  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+.modal-close:hover {
+  color: #ff3333;
 }
 
-/* Neon Buttons */
-.neon-button {
-  background-color: #9400D3;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
+/* Styling the scrollbar (optional for a polished look) */
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: #007bff;
   border-radius: 10px;
-  text-shadow: 0px 0px 10px #fff;
-  cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-.neon-button:hover {
-  background-color: #fff;
-  color: #9400D3;
-  box-shadow: 0 0 30px #9400D3;
-  transform: scale(1.05);
-}
-
-/* Dropdown container */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropbtn {
-  color: #9400D3;
-  text-decoration: none;
-  padding: 10px;
-  font-size: 18px;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #111;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
-  z-index: 1;
-  border-radius: 5px;
-}
-
-.dropdown-content li {
-  list-style: none;
-}
-
-.dropdown-content li a {
-  color: white;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.dropdown-content li a:hover {
-  background-color: #9400D3;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  #skills {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .skill {
-    width: 80%;
-  }
+/* Ensure images within modal fit well */
+.modal-content img {
+  max-width: 100%;   /* Image should not exceed the modal's width */
+  height: auto;      /* Maintain the aspect ratio of the image */
+  margin-top: 20px;  /* Add some spacing above the image */
+  border-radius: 8px;  /* Optional: Add a slight border-radius for better visuals */
 }
 
 /* Contact Section */
 #contact {
+  background-color: #ffffff;
   padding: 60px 20px;
-  background-color: #000; /* Pure black background */
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-  margin: 50px 0;
-  color: #fff;
-}
-
-/* Contact Section Title */
-#contact h2 {
-  color: #9400D3; /* Neon purple color */
-  text-shadow: 0px 0px 10px #9400D3; /* Neon glow effect */
+  color: #333;
   text-align: center;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+  border-top: 1px solid #eeeeee;
+  border-radius: 12px;
+  max-width: 1200px;
+  margin: 40px auto;
+}
+
+#contact h2 {
   margin-bottom: 30px;
+  font-size: 32px;
+  color: #007bff;
 }
 
-/* Contact Form Styling */
-#contact-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/* Input and Textarea Styling */
-.form-group input,
-.form-group textarea {
+#contact-form input, #contact-form textarea {
+  font-family: 'Roboto', sans-serif;
   width: 100%;
   padding: 15px;
-  background-color: #111; /* Dark background for input fields */
-  border: 2px solid #9400D3; /* Neon purple border */
+  margin: 15px 0;
   border-radius: 8px;
-  color: #fff;
+  border: 1px solid #dddddd;
+  background-color: #f9f9f9;
+  color: #333;
   font-size: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s ease;
+}
+
+#contact-form input:focus, #contact-form textarea:focus {
+  border-color: #007bff;
   outline: none;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
-  border-color: #fff; /* White border on focus */
-  box-shadow: 0 0 15px #9400D3; /* Neon glow on focus */
-}
-
-/* Button Styling */
 #contact-form button {
-  background-color: #9400D3;
-  color: white;
-  padding: 12px 24px;
+  padding: 12px 30px;
+  background-color: #007bff;
   border: none;
-  border-radius: 8px;
+  color: white;
   cursor: pointer;
-  font-size: 18px;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.3s ease;
 }
 
 #contact-form button:hover {
-  background-color: #fff;
-  color: #9400D3;
-  box-shadow: 0 0 30px #9400D3; /* Glowing hover effect */
-  transform: scale(1.05);
+  background-color: #0056b3;
+  transform: translateY(-4px); /* Slight lift effect on hover */
 }
 
-/* Responsive Contact Form */
+/* Responsive Adjustments */
 @media (max-width: 768px) {
-  #contact-form {
-      width: 100%;
+  .modal-content {
+      width: 90%;
+      max-width: 100%;
   }
 
-  .form-group input,
-  .form-group textarea {
+  .project-btn {
       width: 100%;
+      margin: 10px 0;
+      font-size: 18px;
   }
-}
-.neon-button {
-  animation: pulse 1.5s infinite;
-}
 
-@keyframes pulse {
-  0% { box-shadow: 0 0 10px #9400D3; }
-  50% { box-shadow: 0 0 30px #9400D3; }
-  100% { box-shadow: 0 0 10px #9400D3; }
+  h1 {
+      font-size: 28px;
+  }
+
+  nav ul li {
+      display: block;
+      margin: 10px 0;
+  }
 }
