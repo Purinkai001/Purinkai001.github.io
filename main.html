@@ -183,11 +183,26 @@
         <article class="content">
             <div class="text">
                 <h2>Molecular docking</h2>
-                <p>เปรียบเทียบความแม่นยำของการใช้ Autodock Vina โดยอ้างอิงกับผลการทดลองจริง<br>ในกิจกรรมนี้
-                    ผมเปรียบเทียบค่า Kd ที่ได้จากการ dock ibuprofen กับ Cyclooxygenase-2 ผ่านโปรแกรม Autodock Vina
-                    โดยผลลัพธ์คือ รูปแบบที่เสถียรที่สุดของ Ibuprofen จะมีค่าพลังงานกิฟส์อยู่ที่ -7.735 kcal/mol</p><br>
-                <p color="red">ซึ่ง error 50% เนื่องจากผมใช้สูตร non-competitive enzyme กับ competitive enzyme
-                    แต่เดี๋ยวพรุ่งนี้เช้าผมมาเขียนใหม่</p>
+
+                <p style="font-size: 16px;">
+                    เปรียบเทียบความแม่นยำของการใช้ <em>Autodock Vina</em> โดยอ้างอิงกับผลการทดลองจริง<br>
+                    ในกิจกรรมนี้ ผมเปรียบเทียบค่า <span style="font-family: monospace;">Kd</span> ที่ได้จากการ dock
+                    ibuprofen กับ Cyclooxygenase-2
+                    ผ่านโปรแกรม <em>Autodock Vina</em> โดยผลลัพธ์คือ รูปแบบที่เสถียรที่สุดของ Ibuprofen
+                    จะมีค่าพลังงานกิปส์อยู่ที่
+                    <span style="font-family: monospace;">-7.461 kcal/mol</span> ซึ่งเมื่อคำนวณผ่านสมการ
+                    <span style="font-family: monospace;">ΔG = RT ln(Kd)</span> จะได้ <span
+                        style="font-family: monospace;">Kd ≈ 558 nmol/L</span><br>
+                    โดยหากอ้างอิงจาก <a href="https://www.bindingdb.org" target="_blank">BindingDB</a>
+                    (<em>DOI: 10.7270/Q2DN45H6</em>) ที่มีค่า <span style="font-family: monospace;">IC50 ≈ 730 nm</span>
+                    และหากประมาณว่า
+                    <span style="font-family: monospace;">Kd ≈ IC50</span> จะได้ว่ามีความคลาดเคลื่อนสัมพัทธ์อยู่ที่
+                    <span style="font-family: monospace;">23.56%</span> ซึ่งคาดว่ามาจากความผิดพลาดในกระบวนการ Docking
+                </p><br>
+                <p>Docking ทำโดยใช้ <a
+                        href='https://colab.research.google.com/drive/1cHSl78lBPUc_J1IZxLgN4GwD_ADmohVU?usp=sharing'>
+                        Google Colab </a></p>
+                <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2720641/"> อ้างอิง </a>
             </div>
             <div class="image">
                 <img src="image\Dock.jpg" alt="BAMSO">
