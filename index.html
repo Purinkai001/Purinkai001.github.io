@@ -4,26 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Protected Menu</title>
-    <!-- Google Fonts: Poppins and Roboto Slab for a secondary font -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Roboto+Slab:wght@400;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="menu.css">
+    <meta name="description" content="A simple SPA Quiz App">
+    <link rel="stylesheet" href="styles.css">
+    <title>QuizApp</title>
 </head>
 
 <body>
 
-    <div class="container">
-        <h1>Protected Access</h1>
-        <p>Enter the password to proceed:</p>
-        <button id="proceed-btn">Proceed to Main Page</button>
-        <input type="password" id="password-input" placeholder="Enter Password" />
-        <p id="error-message">Incorrect password, try again!</p>
+    <header id="navbar">
+    </header>
+
+    <main id="view-container">
+        <p>Loading...</p>
+    </main>
+
+    <div id="modal-root">
     </div>
 
-    <script src="menu.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

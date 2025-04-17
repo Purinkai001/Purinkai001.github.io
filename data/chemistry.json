@@ -1,0 +1,77 @@
+[
+    {
+        "id": 101,
+        "question": "What is the chemical symbol for table salt?",
+        "choices": [
+            "NaCl",
+            "KCl",
+            "CaCl₂",
+            "MgCl₂"
+        ],
+        "answerIndex": 0,
+        "difficulty": "easy",
+        "imagePath": "",
+        "hint": "Common kitchen compound.",
+        "explanation": "Table salt is sodium chloride (NaCl)."
+    },
+    {
+        "id": 102,
+        "question": "Which element has the symbol 'O'?",
+        "choices": [
+            "Osmium",
+            "Oxygen",
+            "Oganesson",
+            "Gold"
+        ],
+        "answerIndex": 1,
+        "difficulty": "easy",
+        "imagePath": "",
+        "hint": "We need it to breathe.",
+        "explanation": "'O' is the chemical symbol for Oxygen."
+    },
+    {
+        "id": 103,
+        "question": "What is the pH of pure water?",
+        "choices": [
+            "0",
+            "7",
+            "14",
+            "1"
+        ],
+        "answerIndex": 1,
+        "difficulty": "medium",
+        "imagePath": "",
+        "hint": "It's considered neutral.",
+        "explanation": "Pure water has a neutral pH of 7."
+    },
+    {
+        "id": 104,
+        "question": "Which intermolecular force is strongest in water?",
+        "choices": [
+            "Dipole–dipole",
+            "London dispersion",
+            "Hydrogen bonding",
+            "Ionic"
+        ],
+        "answerIndex": 2,
+        "difficulty": "medium",
+        "imagePath": "assets/images/hydrogen-bonding.png",
+        "hint": "Water molecules form a network of this bond.",
+        "explanation": "Hydrogen bonds between H and O are the strongest intermolecular forces in water."
+    },
+    {
+        "id": 105,
+        "question": "What is Avogadro's number (approximately)?",
+        "choices": [
+            "$6.022 \\times 10^{23}$",
+            "$3.14 \\times 10^{15}$",
+            "$1.602 \\times 10^{-19}$",
+            "$9.81 \\times 10^{0}$"
+        ],
+        "answerIndex": 0,
+        "difficulty": "hard",
+        "imagePath": "",
+        "hint": "Number of particles in one mole.",
+        "explanation": "Avogadro's number is the number of constituent particles (usually atoms or molecules) per mole, approximately $6.022 \\times 10^{23}$ mol⁻¹."
+    }
+]
