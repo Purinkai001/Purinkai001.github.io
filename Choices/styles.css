@@ -721,3 +721,86 @@ img {
   color: var(--bg);
   text-decoration: none;
 }
+
+/* Optional: Style for Audio Toggle Button */
+#toggle-audio-btn {
+  /* Use btn-secondary styles or create custom */
+  background-color: var(--hover-bg);
+  color: var(--fg);
+  border: 1px solid var(--border-color);
+  margin-top: var(--spacing-md);
+  /* Add some space */
+  min-width: 150px;
+  /* Give it some width */
+}
+
+#toggle-audio-btn:hover {
+  background-color: var(--border-color);
+}
+
+/* Add styles for Flashcard Mode */
+.flashcard-answer-area {
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  border-top: 1px dashed var(--border-color);
+  /* Initially hidden, shown by JS */
+}
+
+.flashcard-answer-area p {
+  margin-bottom: var(--spacing-sm);
+}
+
+.flashcard-answer-area .correct-answer-text {
+  font-weight: 500;
+  color: var(--accent-alt);
+  /* Highlight answer */
+  background-color: rgba(42, 207, 207, 0.1);
+  /* Subtle background */
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius);
+  display: inline-block;
+  /* Fit content */
+  margin-bottom: var(--spacing-md);
+}
+
+.flashcard-self-assessment {
+  margin-top: var(--spacing-md);
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-md);
+}
+
+/* Style mode selection radio buttons */
+.form-group label.mode-label {
+  /* Style for radio labels */
+  margin-left: 5px;
+  /* Space after radio button */
+  margin-right: 15px;
+  /* Space between options */
+  font-weight: 400;
+  color: var(--fg);
+}
+
+.form-group input[type="radio"] {
+  /* Style radio buttons themselves */
+  width: auto;
+  /* Override full width */
+  vertical-align: middle;
+  margin-right: 3px;
+  accent-color: var(--accent);
+}
+
+/* Hide elements specifically for flashcard/quiz mode if needed */
+.quiz-mode .flashcard-only {
+  display: none;
+}
+
+.flashcard-mode .quiz-only {
+  display: none;
+}
+
+.flashcard-mode #choices-area {
+  display: none;
+}
+
+/* Hide choices area in flashcard mode */

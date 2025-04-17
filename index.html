@@ -4,24 +4,674 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A simple SPA Quiz App">
-    <link rel="stylesheet" href="styles.css">
-    <title>QuizApp</title>
+    <title>It Watches & Listens</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Inter:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #f0f0f0;
+            overflow: hidden;
+            /* Restore default cursor */
+            cursor: default;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Vignette and subtle pulse effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            box-shadow: inset 0 0 15vw 5vw rgba(100, 0, 0, 0.4);
+            pointer-events: none;
+            z-index: 5;
+            animation: pulseVignette 5s infinite ease-in-out;
+            opacity: 0.7;
+        }
+
+        @keyframes pulseVignette {
+
+            0%,
+            100% {
+                box-shadow: inset 0 0 15vw 5vw rgba(100, 0, 0, 0.4);
+                opacity: 0.7;
+            }
+
+            50% {
+                box-shadow: inset 0 0 18vw 6vw rgba(150, 0, 0, 0.5);
+                opacity: 0.8;
+            }
+        }
+
+        /* Title/Intro Text - Positioned higher */
+        #intro-text {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Creepster', cursive;
+            font-size: 4.5rem;
+            color: #aa0000;
+            text-shadow: 2px 2px 8px #000;
+            text-align: center;
+            animation: flicker 4s infinite alternate ease-in-out;
+            z-index: 10;
+        }
+
+        @keyframes flicker {
+
+            0%,
+            100% {
+                color: #aa0000;
+                opacity: 0.8;
+            }
+
+            50% {
+                color: #ffcccc;
+                opacity: 1;
+                text-shadow: 0 0 10px #ff0000, 1px 1px 5px #000;
+            }
+        }
+
+        /* Eyeball Container - Positioned below title */
+        #eyeball-container {
+            position: absolute;
+            top: calc(10% + 70px);
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+        }
+
+        /* Eyeball element - Fixed position */
+        #eyeball {
+            width: 70px;
+            height: 70px;
+            background-color: #e0e0e0;
+            border-radius: 50%;
+            border: 3px solid #770000;
+            box-shadow: 0 0 15px 4px rgba(180, 0, 0, 0.5);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: subtleTwitch 15s infinite ease-in-out alternate;
+        }
+
+        /* Iris - Using pseudo-element */
+        #eyeball::before {
+            content: '';
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            background-color: #b00000;
+            border-radius: 50%;
+            border: 2px solid #440000;
+        }
+
+        /* Pupil - Now a separate div */
+        #pupil {
+            width: 15px;
+            height: 15px;
+            background-color: #000;
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.08s ease-out;
+            z-index: 1;
+        }
+
+        @keyframes subtleTwitch {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            25% {
+                transform: translate(1px, -1px) rotate(0.5deg);
+            }
+
+            50% {
+                transform: translate(-1px, 1px) rotate(-0.5deg);
+            }
+
+            75% {
+                transform: translate(0px, 1px) rotate(0deg);
+            }
+        }
+
+        /* Jumpscare Overlay - Styles mostly unchanged */
+        #jumpscare {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(180, 0, 0, 0.95);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-family: 'Creepster', cursive;
+            font-size: 7vw;
+            color: #111;
+            padding: 20px;
+            animation: flash 0.7s ease-out forwards;
+            opacity: 0;
+        }
+
+        #jumpscare span {
+            text-shadow: 2px 2px 4px #000;
+            line-height: 1.2;
+        }
+
+        @keyframes flash {
+            0% {
+                opacity: 0;
+                transform: scale(1.2);
+            }
+
+            20% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            80% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+        }
+
+        /* Button Container (Jumpscare Buttons) */
+        #button-container {
+            position: absolute;
+            bottom: 3%;
+            /* Lowered slightly */
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 10;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .action-button {
+            font-family: 'Creepster', cursive;
+            font-size: 1.5rem;
+            padding: 12px 25px;
+            background-color: #220000;
+            color: #b0b0b0;
+            border: 2px solid #990000;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
+            text-shadow: 1px 1px 3px #000;
+        }
+
+        .action-button:hover {
+            background-color: #990000;
+            color: #fff;
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 5px 10px rgba(255, 0, 0, 0.3);
+        }
+
+        .action-button:active {
+            transform: translateY(1px) scale(0.98);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        /* --- NPC Styles --- */
+        #npc-container {
+            position: absolute;
+            bottom: 12%;
+            /* Moved up to avoid overlap */
+            left: 3%;
+            width: 280px;
+            /* Slightly narrower */
+            max-width: 75%;
+            /* Adjusted max-width */
+            background-color: rgba(10, 10, 10, 0.9);
+            /* Slightly more opaque */
+            border: 1px solid #550000;
+            border-radius: 8px;
+            padding: 15px;
+            padding-top: 30px;
+            /* More padding top for close button */
+            z-index: 15;
+            font-family: 'Inter', sans-serif;
+            color: #ccc;
+            box-shadow: 0 0 15px rgba(100, 0, 0, 0.3);
+            opacity: 0.95;
+            /* Slightly more opaque */
+            cursor: default;
+            /* Add transition for smooth hide/show if needed later */
+        }
+
+        /* NPC Close Button */
+        #npc-close-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #550000;
+            color: #ccc;
+            border: 1px solid #990000;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            font-family: 'Creepster', cursive;
+            font-size: 1.1rem;
+            line-height: 23px;
+            /* Center 'X' vertically */
+            text-align: center;
+            cursor: pointer;
+            padding: 0;
+            z-index: 16;
+            /* Above other NPC content */
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        #npc-close-button:hover {
+            background-color: #990000;
+            color: #fff;
+        }
+
+        /* NPC Character Visual */
+        #npc-character {
+            font-family: 'Creepster', cursive;
+            /* Or 'monospace' for ASCII art */
+            font-size: 1.8rem;
+            color: #aa0000;
+            text-align: center;
+            margin-bottom: 10px;
+            /* white-space: pre; */
+            /* Uncomment if using multi-line ASCII */
+        }
+
+
+        #npc-dialogue {
+            min-height: 50px;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            border-bottom: 1px dashed #440000;
+            padding-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        #npc-dialogue p {
+            margin: 0;
+        }
+
+        #npc-dialogue p.answer {
+            margin-top: 8px;
+            font-style: italic;
+            color: #ffaaaa;
+        }
+
+        #npc-questions {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #npc-questions li {
+            margin-bottom: 8px;
+        }
+
+        .npc-question-button {
+            display: block;
+            width: 100%;
+            padding: 8px 10px;
+            background-color: #330000;
+            border: 1px solid #770000;
+            color: #ccc;
+            font-family: 'Creepster', cursive;
+            font-size: 1.1rem;
+            text-align: left;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .npc-question-button:hover {
+            background-color: #770000;
+            color: #fff;
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            #intro-text {
+                font-size: 3.5rem;
+                top: 8%;
+            }
+
+            #eyeball-container {
+                top: calc(8% + 60px);
+            }
+
+            #eyeball {
+                width: 60px;
+                height: 60px;
+            }
+
+            #eyeball::before {
+                width: 30px;
+                height: 30px;
+            }
+
+            #pupil {
+                width: 12px;
+                height: 12px;
+            }
+
+            .action-button {
+                font-size: 1.2rem;
+                padding: 10px 20px;
+            }
+
+            #button-container {
+                bottom: 3%;
+                gap: 10px;
+            }
+
+            /* Keep NPC centered on mobile, adjust bottom */
+            #npc-container {
+                width: 250px;
+                bottom: 15%;
+                /* Further up on mobile */
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .npc-question-button {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #intro-text {
+                font-size: 2.8rem;
+                top: 5%;
+            }
+
+            #eyeball-container {
+                top: calc(5% + 50px);
+            }
+
+            #eyeball {
+                width: 50px;
+                height: 50px;
+            }
+
+            #eyeball::before {
+                width: 25px;
+                height: 25px;
+            }
+
+            #pupil {
+                width: 10px;
+                height: 10px;
+            }
+
+            .action-button {
+                font-size: 1rem;
+                padding: 8px 15px;
+            }
+
+            #button-container {
+                gap: 8px;
+                bottom: 2%;
+            }
+
+            #npc-container {
+                width: 90%;
+                bottom: 12%;
+                /* Adjust as needed */
+                padding-top: 35px;
+                /* Ensure space for close button */
+            }
+
+            #npc-character {
+                font-size: 1.5rem;
+            }
+
+            .npc-question-button {
+                font-size: 0.9rem;
+                padding: 6px 8px;
+            }
+
+            #npc-close-button {
+                width: 22px;
+                height: 22px;
+                line-height: 20px;
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
+    <div id="intro-text">It Watches</div>
 
-    <header id="navbar">
-    </header>
-
-    <main id="view-container">
-        <p>Loading...</p>
-    </main>
-
-    <div id="modal-root">
+    <div id="eyeball-container">
+        <div id="eyeball">
+            <div id="pupil"></div>
+        </div>
     </div>
 
-    <script src="script.js"></script>
+    <div id="jumpscare">
+        <span id="jumpscare-text"></span>
+    </div>
+
+    <div id="npc-container">
+        <button id="npc-close-button" title="Close Chat">X</button>
+        <div id="npc-character">???</div>
+        <div id="npc-dialogue">
+            <p>...</p>
+        </div>
+        <ul id="npc-questions">
+            <li><button class="npc-question-button">Loading...</button></li>
+            <li><button class="npc-question-button">Loading...</button></li>
+            <li><button class="npc-question-button">Loading...</button></li>
+        </ul>
+    </div>
+
+    <div id="button-container">
+        <a href="/Choices/choices.html" class="action-button choice-link">Choice 1</a>
+        <a href="/Choices/choices.html" class="action-button choice-link">Choice 2</a>
+        <a href="/Choices/choices.html" class="action-button choice-link">Choice 3</a>
+        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" id="button-unknown"
+            class="action-button empty-link">???</a>
+        <a href="#" id="button-run" class="action-button empty-link">Run?</a>
+    </div>
+
+    <script>
+        // --- DOM Elements ---
+        const eyeballContainer = document.getElementById('eyeball-container');
+        const eyeball = document.getElementById('eyeball');
+        const pupil = document.getElementById('pupil');
+        const jumpscareOverlay = document.getElementById('jumpscare');
+        const jumpscareTextElement = document.getElementById('jumpscare-text');
+        const buttons = document.querySelectorAll('.action-button');
+        const body = document.body;
+        const npcContainer = document.getElementById('npc-container');
+        const npcDialogue = document.getElementById('npc-dialogue');
+        const npcQuestionsList = document.getElementById('npc-questions');
+        const npcCloseButton = document.getElementById('npc-close-button'); // Get close button
+
+        // --- State ---
+        let jumpscareTimeout = null;
+        let isJumpscareActive = false;
+        let allQuestionsData = [];
+        let currentQuestions = [];
+
+        // --- Jumpscare Phrases ---
+        const choicePhrases = ["FOUND YOU!", "PEEKABOO!", "SURPRISE!", "LOOK BEHIND YOU!", "CAN YOU SEE ME?"];
+        const unknownPhrase = "IT SEES YOU";
+        const runPhrase = "TOO LATE!";
+
+        // --- Pupil Tracking ---
+        function updatePupilPosition(mouseX, mouseY) {
+            // Prevent tracking if eyeball isn't visible (e.g., error state)
+            if (!eyeball || !pupil) return;
+            const eyeRect = eyeball.getBoundingClientRect();
+            // Check if rect has valid dimensions (eyeball might not be rendered yet)
+            if (eyeRect.width === 0 || eyeRect.height === 0) return;
+
+            const eyeCenterX = eyeRect.left + eyeRect.width / 2;
+            const eyeCenterY = eyeRect.top + eyeRect.height / 2;
+            const angle = Math.atan2(mouseY - eyeCenterY, mouseX - eyeCenterX);
+            const maxDist = (eyeball.offsetWidth * 0.25) - (pupil.offsetWidth / 2);
+            const distMouseToEye = Math.sqrt(Math.pow(mouseX - eyeCenterX, 2) + Math.pow(mouseY - eyeCenterY, 2));
+            const clampedDist = Math.min(distMouseToEye / 2, maxDist);
+            const pupilOffsetX = Math.cos(angle) * clampedDist;
+            const pupilOffsetY = Math.sin(angle) * clampedDist;
+            pupil.style.transform = `translate(calc(-50% + ${pupilOffsetX}px), calc(-50% + ${pupilOffsetY}px))`;
+        }
+
+        // --- Jumpscare Logic (Unchanged) ---
+        function triggerJumpscare(event, clickedButton) {
+            event.preventDefault();
+            if (isJumpscareActive) return;
+            isJumpscareActive = true;
+            let currentJumpscareText = "";
+            if (clickedButton.id === 'button-unknown') currentJumpscareText = unknownPhrase;
+            else if (clickedButton.id === 'button-run') currentJumpscareText = runPhrase;
+            else currentJumpscareText = choicePhrases[Math.floor(Math.random() * choicePhrases.length)];
+            jumpscareTextElement.textContent = currentJumpscareText;
+            jumpscareOverlay.style.display = 'flex';
+            jumpscareOverlay.style.animation = 'none'; void jumpscareOverlay.offsetWidth;
+            jumpscareOverlay.style.animation = 'flash 0.7s ease-out forwards';
+            body.classList.add('jumpscare-active');
+            if (jumpscareTimeout) clearTimeout(jumpscareTimeout);
+            jumpscareTimeout = setTimeout(() => {
+                jumpscareOverlay.style.display = 'none';
+                body.classList.remove('jumpscare-active');
+                isJumpscareActive = false;
+                const linkUrl = clickedButton.getAttribute('href');
+                if (linkUrl && linkUrl !== '#') { window.location.href = linkUrl; }
+            }, 700);
+        }
+
+        // --- NPC Logic ---
+
+
+        async function loadQuestions() {
+            try {
+                // ** REPLACE THIS BLOCK with fetch **
+                const response = await fetch('/questions.json');
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                allQuestionsData = await response.json();
+                // --- End of block to replace ---
+                //allQuestionsData = sampleQuestionsData; // Using sample data
+                // --- End of sample data usage ---
+                if (!Array.isArray(allQuestionsData) || allQuestionsData.length === 0) throw new Error("Invalid question data.");
+                displayRandomQuestions();
+                npcDialogue.innerHTML = '<p>Ask me...</p>';
+            } catch (error) {
+                console.error("Failed to load questions:", error);
+                npcDialogue.innerHTML = '<p>It seems... quiet. Too quiet.</p>';
+                npcQuestionsList.innerHTML = '<li>Error loading questions.</li>';
+            }
+        }
+
+        function displayRandomQuestions() {
+            if (allQuestionsData.length === 0) return; // Don't run if no data
+            if (allQuestionsData.length < 3) {
+                currentQuestions = [...allQuestionsData];
+            } else {
+                const shuffled = [...allQuestionsData].sort(() => 0.5 - Math.random());
+                currentQuestions = shuffled.slice(0, 3);
+            }
+            npcQuestionsList.innerHTML = '';
+            currentQuestions.forEach((q, index) => {
+                const li = document.createElement('li');
+                const button = document.createElement('button');
+                button.classList.add('npc-question-button');
+                button.textContent = q.question;
+                button.dataset.index = index;
+                button.addEventListener('click', handleQuestionClick);
+                li.appendChild(button);
+                npcQuestionsList.appendChild(li);
+            });
+        }
+
+        function handleQuestionClick(event) {
+            const button = event.target;
+            const questionIndex = parseInt(button.dataset.index, 10);
+            const selectedQuestion = currentQuestions[questionIndex];
+            if (selectedQuestion) {
+                npcDialogue.innerHTML = `
+                    <p>You asked: "${selectedQuestion.question}"</p>
+                    <p class="answer">... ${selectedQuestion.answer}</p>
+                `;
+                displayRandomQuestions();
+            }
+        }
+
+        // --- Event Listeners ---
+        window.addEventListener('mousemove', (e) => {
+            updatePupilPosition(e.clientX, e.clientY);
+        });
+        window.addEventListener('touchmove', (e) => {
+            if (e.touches.length > 0) {
+                const touch = e.touches[0];
+                updatePupilPosition(touch.clientX, touch.clientY);
+            }
+        }, { passive: true });
+
+        buttons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                triggerJumpscare(e, button);
+            });
+        });
+
+        // NPC Close Button Listener
+        npcCloseButton.addEventListener('click', () => {
+            npcContainer.style.display = 'none'; // Hide the NPC container
+        });
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            loadQuestions();
+            console.log("Horror game initialized. It watches... and listens.");
+            // Initial pupil position update in case mouse doesn't move immediately
+            // Use center of screen as default target
+            updatePupilPosition(window.innerWidth / 2, window.innerHeight / 2);
+        });
+
+    </script>
 </body>
 
 </html>
